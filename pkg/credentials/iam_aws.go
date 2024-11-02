@@ -188,10 +188,13 @@ func (m *IAM) Retrieve() (Value, error) {
 		roleCreds, err = getEcsTaskCredentials(m.Client, endpoint, token)
 
 	case tokenFile != "" && fullURI != "":
+		fmt.Println("made it")
 		endpoint = fullURI
 		roleCreds, err = getEKSPodIdentityCredentials(m.Client, endpoint, tokenFile)
 
 	case fullURI != "":
+		fmt.Println("failing in this block")
+		fmt.Printf("vals: %s . %s \n", tokenFile, fullURI)
 		if len(endpoint) == 0 {
 			endpoint = fullURI
 			var ok bool
